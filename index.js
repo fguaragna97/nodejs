@@ -1,12 +1,30 @@
-function sumAsync(a, b, callback) {
-  setTimeout(function () {
-    callback(a + b);
-  }, 1000);
+const commandLineArgs = require("command-line-args");
+
+const items = [];
+
+const params = [
+  {
+    name: "item",
+    alias: "i",
+    type: String,
+  },
+  {
+    name: "completed",
+    alias: "c",
+    type: Boolean,
+  },
+  {
+    name: "date",
+    alias: "d",
+    type: String,
+  },
+];
+
+const options = commandLineArgs(params);
+
+const { item = "", completed = false, date = "" } = options;
+if (item) {
+  items.push({ item, completed, date });
 }
 
-console.log("before");
-sumAsync(40, 2, function (result) {
-  console.log("Result:", result);
-});
-
-console.log("after");
+console.log(items);
